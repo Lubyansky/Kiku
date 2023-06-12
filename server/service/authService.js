@@ -9,7 +9,7 @@ const ApiError = require('../exceptions/apiError');
 
 class AuthService {
     async registration(username, password, _registration_date) {
-        const candidate = await User.findOne({where: {username}})
+        const candidate = await User.findOne({where: {username}, paranoid: false})
         console.log(candidate)
         if (candidate && candidate.toJSON().roles.includes('admin')) {
             throw ApiError.BadRequest('')
